@@ -6,17 +6,22 @@ export default function TextForm(props) {
     //console.log('uppercase clicked')
     let newText = text.toUpperCase();
     setText(newText)
+    props.showAlert("Converted to Uppercase", "success");
   }
+
   const handleLowerCase = () =>{
     //console.log('lowercase clicked')
     let newText = text.toLowerCase();
     setText(newText)
+    props.showAlert("Converted to Lowercase", "success");
   }
+
   const handleClearText = () =>{
     //console.log('Text clear')
     let newText = '';
     setText(newText)
   }
+
   const handleinverseclick = () => {
     console.log("inverse click is triggered");
     let newtext = "";
@@ -25,16 +30,18 @@ export default function TextForm(props) {
     }
     setText(newtext);
   }
+
   const copyToClipboard = () => {
     const textElement = document.getElementById("myBox");
     if (textElement) {
       const text = textElement.innerText || textElement.value;
       navigator.clipboard.writeText(text)
-        .then(() => alert("Copied to clipboard!"))
-        .catch(err => console.error("Failed to copy: ", err));
+        // .then(() => alert("Copied to clipboard!"))
+        // .catch(err => console.error("Failed to copy: ", err));
     } else {
       console.error("Element with ID 'myBox' not found");
     }
+    props.showAlert("Copied to Clipboard", "success");
   };
   
   const startListening = () => {
@@ -46,7 +53,9 @@ export default function TextForm(props) {
     };
 
     recognition.start();
+    props.showAlert("Microphone starts recording sound", "warning");
   };
+
   const handleOnChange = (event) =>{
     //console.log('onchange')
     setText(event.target.value)
