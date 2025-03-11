@@ -60,6 +60,15 @@ export default function TextForm(props) {
     //console.log('onchange')
     setText(event.target.value)
   }
+  function wordCount(text) {
+    return text.trim() ? text.trim().split(/\s+/).length : 0;
+  }
+
+  function minutesRead(text) {
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    return (0.008 * words).toFixed(2); // Rounds to 2 decimal places
+}
+
   return (
     <>
       <div className="container" style={{ color: props.mode === 'light'? 'black' : 'white' }}>
@@ -78,8 +87,8 @@ export default function TextForm(props) {
       </div>
       <div className="container my-3"style={{ color: props.mode === 'light'? 'black' : 'white' }} >
         <h2>Your text summary</h2>
-        <p>{text.split(" ").length} words and {text.length} characters</p>
-        <p>{0.008*text.split(" ").length} minutes read </p>
+        <p>{wordCount(text)} words and {text.length} characters</p>
+        <p>{minutesRead(text)} minutes read </p>
         <h2>Preview</h2>
         <p>{text.length>0? text:'Enter text above to preview' }</p>
       </div>
